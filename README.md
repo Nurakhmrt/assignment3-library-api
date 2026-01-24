@@ -1,7 +1,3 @@
-Хорошо, вот строгий вариант README.md без смайлов, оформленный профессионально и по существу.
-
-Скопируй этот текст в свой файл:
-
 Library Management API
 Project Overview
 This project is a Java-based application for library management, integrated with a PostgreSQL relational database. It is built using a layered architecture to demonstrate clean code practices and core Object-Oriented Programming (OOP) principles.
