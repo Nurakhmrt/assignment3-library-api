@@ -1,57 +1,120 @@
-Хорошо, вот строгий вариант README.md без смайлов, оформленный профессионально и по существу.
+# Assignment 3 & Assignment 4 – Library Management API (Java)
 
-Скопируй этот текст в свой файл:
+This project is an extended version of **Assignment 3**, updated to fully satisfy the requirements of **Assignment 4**.  
+It demonstrates SOLID principles, advanced object-oriented programming concepts, and a clean layered architecture.
 
-Library Management API
-Project Overview
-This project is a Java-based application for library management, integrated with a PostgreSQL relational database. It is built using a layered architecture to demonstrate clean code practices and core Object-Oriented Programming (OOP) principles.
+---
 
-Technical Stack
-Language: Java 17 (Temurin JDK).
+## Project Overview
 
-Database: PostgreSQL 16 (Port: 5433).
+A console-based Library Management System implemented in Java.  
+The system manages books and categories, applies validation and exception handling, and persists data using JDBC and PostgreSQL.
 
-Connectivity: JDBC (PostgreSQL Driver 42.7.8).
+---
 
-IDE: IntelliJ IDEA.
+## Architecture
 
-System Architecture
-The application is divided into distinct layers to separate concerns:
+The project follows a layered architecture:
 
-Model Layer: Contains entity classes such as BookBase, EBook, and Category.
+- Controller layer (entry point via `Main`)
+- Service layer (business logic and validation)
+- Repository layer (JDBC-based data access)
+- Database layer (PostgreSQL)
 
-Repository Layer: Manages direct database interactions and SQL execution.
+This structure ensures separation of concerns and maintainability.
 
-Service Layer: Implements business logic and performs data validation.
+---
 
-Controller (Main): Serves as the entry point to demonstrate API features and exception handling.
+## Assignment 4 Features
 
-OOP Principles
-Abstraction: Implemented through the BookBase abstract class to define fundamental book attributes.
+### SOLID Principles
 
-Inheritance: The EBook class extends BookBase to include specific properties like file size.
+- **Single Responsibility Principle (SRP)**  
+  Responsibilities are separated across model, service, repository, and utility layers.
 
-Composition: Objects of the BookBase type contain a Category object, establishing a structural relationship between entities.
+- **Open/Closed Principle (OCP)**  
+  The abstract class `BookBase` is extended by multiple subclasses without modification.
 
-Polymorphism: The displayInfo() method is overridden in subclasses to provide specific output formats.
+- **Liskov Substitution Principle (LSP)**  
+  Objects of type `EBook` and `PrintedBook` can be used interchangeably as `BookBase`.
+
+- **Interface Segregation Principle (ISP)**  
+  Interfaces `Printable` and `PricedItem` provide focused responsibilities.
+
+- **Dependency Inversion Principle (DIP)**  
+  `BookService` depends on repository interfaces instead of concrete implementations.
+
+---
+
+### Object-Oriented Programming
+
+- **Abstract Class**  
+  `BookBase` defines common properties and behavior for all books.
+
+- **Inheritance**  
+  `EBook` and `PrintedBook` extend `BookBase`.
+
+- **Polymorphism**  
+  Books are handled through `List<BookBase>` with runtime method dispatch.
+
+- **Composition**  
+  `BookBase` contains a `Category` object, demonstrating composition.
+
+---
+
+### Interfaces
+
+- `Printable`  
+  Contains a `default` method `print()` for standardized output.
+
+- `PricedItem`  
+  Contains a `static` method `isValidPrice()` for price validation.
+
+---
+
+### Generics
+
+- A generic CRUD interface is implemented:
+  ```java
+  CrudRepository<T, ID>
+BookRepository implements this interface, ensuring reusable and type-safe data access.
+
+Lambda Expressions
+Lambda expressions are used for sorting collections:
+
+SortingUtils.sort(books, (a, b) -> a.getTitle().compareToIgnoreCase(b.getTitle()));
+Reflection (RTTI)
+Reflection is demonstrated using ReflectionUtils.
+
+The utility inspects objects at runtime and prints:
+
+Class name
+
+Declared fields
+
+Declared methods
 
 Exception Handling
-The project utilizes a custom exception hierarchy to ensure system stability:
+All validation and business rules are handled in the service layer.
 
-InvalidInputException: Validates business rules, such as ensuring prices remain positive.
+Custom exceptions used:
 
-DatabaseOperationException: Captures and manages errors during SQL execution or connection attempts.
+InvalidInputException
 
-Setup and Execution
-Verify that PostgreSQL is active on port 5433 and the library_db database exists.
+ResourceNotFoundException
 
-Ensure the postgresql-42.7.8.jar driver is added to the project libraries.
+DuplicateResourceException
 
-Update the credentials in DatabaseConnection.java to match the local environment.
+DatabaseOperationException
 
-Execute the Main.java file to start the demonstration.
+How to Run
+Configure PostgreSQL and create the required tables.
 
-Conclusion
-This project demonstrates the ability to integrate Java with a relational database, implement a scalable architecture, and manage complex environment configurations such as custom database ports and JDBC connectivity.
-## Execution Result
-![Console Output](result.png)
+Update database credentials in DatabaseConnection.
+
+Run Main.java to execute the application.
+
+Notes
+Assignment 4 is implemented on top of Assignment 3, not as a separate project.
+
+The final implementation is available in the master branch of this repository.
