@@ -1,0 +1,13 @@
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
+
+# Environment
+.env
